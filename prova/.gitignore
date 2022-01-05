@@ -1,0 +1,11 @@
+*.pyc
+*.sw[p-z]
+venv*
+env*
+.vscode*
+prova/*.log
+prova/local_settings.py
+media*
+smedia*
+debug.log*
+

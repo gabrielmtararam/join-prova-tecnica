@@ -1,0 +1,5 @@
+Django==3.2.5
+six==1.16.0
+Pillow==5.2.0
+psycopg2-binary==2.8.1
+requests==2.22.0
