@@ -21,5 +21,8 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url(r'^questao-1/', include('prova.questao1.urls')),
+    url(r'^questao-1/', include('prova.questao1.urls')),
+    # url(r'^', include('prova.questao45.urls')),
+
+
 ]
