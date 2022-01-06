@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'prova.questao1',
     'prova.questao4',
+    'prova.questao5',
 ]
 
 MIDDLEWARE = [
