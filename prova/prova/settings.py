@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'prova.questao1',
+    'prova.questao4',
 ]
 
 MIDDLEWARE = [
