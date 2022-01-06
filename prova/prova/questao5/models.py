@@ -14,5 +14,5 @@ class Livro(models.Model):
     editora = models.ForeignKey(Editora, on_delete=models.CASCADE)
     #One to Many
     edicoes = models.ManyToManyField(Edicao)
-    registro_inmetro = models.OneToOneField(registro_inmetro)
+    registro_inmetro = models.OneToOneField(registro_inmetro, on_delete=models.CASCADE)
     #basicamente foreign key porem com unique=True
