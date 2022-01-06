@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^questao-1/', include('prova.questao1.urls')),
     url(r'^questao-4/', include('prova.questao4.urls')),
     url(r'^questao-5/', include('prova.questao5.urls')),
+    url(r'^questao-7/', include('prova.questao7.urls')),
 
 
 ]

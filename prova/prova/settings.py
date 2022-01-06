@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'prova.questao1',
     'prova.questao4',
     'prova.questao5',
+    'prova.questao7',
 ]
 
 MIDDLEWARE = [
@@ -132,4 +133,12 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+STATIC_ROOT = os.path.join(PATH, "static")
 from .local_settings import *
+

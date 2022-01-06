@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/openlayers-map.css' %}" >
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <script>
+        var straitSource;
+        var map;
+    </script>
+</head>
+<body>
+<div id="map" style="height:600px;width:1024px;"></div>
+<div id="popup" title="myproject" class="ol-popup"><a href="#" id="popup-closer" class="ol-popup-closer"></a><div id="popup-content"></div></div>
+<br>
+<button onclick="add_marker();">Adicionar</button>
+<br>-{{markers}}- <br>
+
+
+
+</body>
+
+<script src="{% static 'js/openlayers-map.js' %}"></script>
+
+<script>
+    function add_marker(){
+        $('#myModal').modal('show')
+    }
+</script>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form  action="{% url 'marker' %}" id="form" method="post" enctype="multipart/form-data">
+                    {%  csrf_token %}
+                    <div class="form-group">
+                        {{ marker_form.name.label_tag }} {{ marker_form.name}}
+                    </div>
+                    <div class="form-group">
+                        {{ marker_form.latitude.label_tag }}  {{ marker_form.latitude}}
+                    </div>
+                    <div class="form-group">
+                        {{ marker_form.longitude.label_tag }} {{ marker_form.longitude}}
+                    </div>
+                    <div class="form-group">
+                        {{ marker_form.expire_date.label_tag }}{{ marker_form.expire_date}}
+                    </div>
+                    <input  id="inscreverButton"  type="submit"  class="SendButton" value="Cadastrar Marcador">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="edit_marker_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit_marker_form" action="{% url 'update_marker' %}" method="post" enctype="multipart/form-data">
+                    {%  csrf_token %}
+                      {{ edit_form.id}}
+                    <div class="form-group">
+                        {{ edit_form.name.label_tag }} {{ edit_form.name}}
+                    </div>
+                    <div class="form-group">
+                        {{ edit_form.latitude.label_tag }}  {{ edit_form.latitude}}
+                    </div>
+                    <div class="form-group">
+                        {{ edit_form.longitude.label_tag }} {{ edit_form.longitude}}
+                    </div>
+                    <div class="form-group">
+                        {{ edit_form.expire_date.label_tag }}{{ edit_form.expire_date}}
+                    </div>
+                    <input  id="UpdateButton"  type="submit"  class="SendButton" value="Atualizar Marcador">
+                      <button type="button" onclick="delete_marker();">Excluir</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    function delete_marker(){
+         id = $('#{{edit_form.id.auto_id}}').val()
+           var form_data = new FormData();
+            form_data.append('id', id);
+            form_data.append('csrfmiddlewaretoken', '{{  csrf_token }}');
+            $.ajax({       type: "POST",
+                    url: '{% url 'delete_marker' %}',
+                    data: form_data,
+
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+
+                        location.reload();
+                    }
+                  });
+    }
+
+
+    function open_modal_edit_marker(feature){
+        id = feature.get('id');
+        expire_date = feature.get('expire_date');
+        latitude = feature.get('latitude');
+        longitude = feature.get('longitude');
+        name = feature.get('name');
+        $('#{{edit_form.id.auto_id}}').val(id);
+        $('#{{edit_form.latitude.auto_id}}').val(latitude);
+        $('#{{edit_form.longitude.auto_id}}').val(longitude);
+        $('#{{edit_form.name.auto_id}}').val(name);
+
+
+        if ((expire_date[0])=='0')
+             $('#{{edit_form.expire_date.auto_id}}_day').val(expire_date.slice(1, 2));
+        else
+            $('#{{edit_form.expire_date.auto_id}}_day').val(expire_date.slice(0, 2));
+
+        if ((expire_date[3])=='0')
+             $('#{{edit_form.expire_date.auto_id}}_month').val(expire_date.slice(4, 5));
+        else
+            $('#{{edit_form.expire_date.auto_id}}_month').val(expire_date.slice(3, 5));
+
+        $('#{{edit_form.expire_date.auto_id}}_year').val(expire_date.slice(6, 10));
+
+
+
+     $('#edit_marker_modal').modal('show')
+
+
+    }
+
+</script>
+
+<script>
+
+    var data_aux = [];
+
+    {% for marker in markers %}
+    data_aux.push({"Lon":{{marker.longitude}},
+    "Lat":{{marker.latitude}},
+    "name":"{{marker.name}}",
+    "expire_date":"{{marker.expire_date|date:"d/m/Y"}}",
+    "id":{{marker.id}}
+    });
+    {% endfor %}
+    addPointGeom(data_aux);
+</script>
+</body>
+</html>
