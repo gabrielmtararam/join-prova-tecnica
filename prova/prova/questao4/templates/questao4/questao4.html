@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'utils/base.html' %}
+{% load static %}
 
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-<div class="box" ></div>
+
+
+{% block body %}
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<br><br><br><br>
+<div class="box" style="background: #5b80b2; width: 100px; height: 100px;" ></div>
 <button class="btn">Botao</button>
 <script>
+$( document ).ready(function() {
 $(".btn").click(function() {
  $('.box').hide();
 });
+});
 </script>
-</body>
-</html>
+{% endblock %}
+

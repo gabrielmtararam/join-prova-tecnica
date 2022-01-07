@@ -21,7 +21,7 @@ var center = ol.proj.transform([76.26, 9.93], 'EPSG:4326', 'EPSG:3857'); //initi
         layers: [OSMBaseLayer, straitsLayer],
         target: 'map',
         view: view,
-        controls: [new ol.control.FullScreen(), new ol.control.Zoom()]
+        controls: []
     });
 
    // Popup showing the position the user clicked
@@ -71,8 +71,8 @@ var center = ol.proj.transform([76.26, 9.93], 'EPSG:4326', 'EPSG:3857'); //initi
         }
     });
 
-var data=[{"Lon":19.455128,"Lat":41.310575,"name":"nome1","expire_date":"12/08/2022", "id":2222},
-    {"Lon":16.855165,"Lat":45,"name":"nome2","expire_date":"14/08/2022", "id":3333}];
+// var data=[{"Lon":19.455128,"Lat":41.310575,"name":"nome1","expire_date":"12/08/2022", "id":2222},
+//     {"Lon":16.855165,"Lat":45,"name":"nome2","expire_date":"14/08/2022", "id":3333}];
 
 function addPointGeom(data) {
 
@@ -116,5 +116,5 @@ function addPointGeom(data) {
         });
     }// End of function showStraits()
 
-addPointGeom(data);
+// addPointGeom(data);
 

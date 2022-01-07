@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+   Prova Join Gabriel Mari Tararam
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="{% static 'css/material-dashboard.css' %}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+
+</head>
+
+<body class="dark-edition" style="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="black" >
+      <div class="logo"><a  class="simple-text logo-normal">
+          PROVA JOIN
+        </a></div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item  ">
+            <a class="nav-link" href="{% url 'questao_4' %}">
+              <i class="material-icons">dashboard</i>
+              <p>Questão 4</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'marker' %}">
+              <i class="material-icons">location_ons</i>
+              <p>Questão 7</p>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:void(0)">Map</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+<!--      <div id="map" style="width: 100%; background-color: rgb(228, 255, 246);"></div>-->
+    <style>
+         .main-base-content{
+      z-index: 2;
+height: calc(100vh - 70px);
+margin-top: 70px;
+             background: #ffffff;
+    }
+    </style>
+    <div class="main-base-content">
+      {% block body %}
+{% endblock %}
+</div>
+    </div>
+  </div>
+
+<!--  <style>-->
+<!--    #map{-->
+<!--      z-index: 2;-->
+<!--height: calc(100vh - 70px);-->
+<!--margin-top: 70px;-->
+<!--    }-->
+<!--  </style>-->
+
+  <!--   Core JS Files   -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-material-design.min.js' %}"></script>
+
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+  <script src="{% static 'js/material-dashboard.js' %}"></script>
+
+
+
+</body>
+
+</html>

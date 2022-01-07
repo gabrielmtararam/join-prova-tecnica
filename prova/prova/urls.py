@@ -19,12 +19,15 @@ from django.urls import  include
 from django.contrib import admin
 from django.urls import path
 
+from .questao7.views import questao7
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^questao-1/', include('prova.questao1.urls')),
     url(r'^questao-4/', include('prova.questao4.urls')),
     url(r'^questao-5/', include('prova.questao5.urls')),
+    url(r'^$', questao7,name="home"),
     url(r'^questao-7/', include('prova.questao7.urls')),
-
+    url(r'^utils/', include('prova.utils.urls')),
 
 ]

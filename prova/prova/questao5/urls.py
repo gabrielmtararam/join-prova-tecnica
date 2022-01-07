@@ -7,6 +7,6 @@ from .views import questao5
 
 urlpatterns = [
 
-    url(r'^$', questao5, name=''),
+    url(r'^$', questao5, name='questao_5'),
 
 ]

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'prova.questao4',
     'prova.questao5',
     'prova.questao7',
+    'prova.utils',
 ]
 
 MIDDLEWARE = [
