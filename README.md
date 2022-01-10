@@ -49,7 +49,7 @@ no servidor, porem não são exibidos ao usuario.
 Além disso existe o problema que caso a tela tenha suas dimensões alteradas a API de exibição de mapas exige que
 a página seja recarregada para renderizar com novas dimensões.
 
-Previsão para estar hospedado a partir de sábado 08/01/2022 em:
+Previsão para estar hospedado a partir de terça 11/01/2022 em:
 
 [Exemplo](45.82.75.75:8001)
 (Esse link será atualizado assim que o servidor estiver configurado)
